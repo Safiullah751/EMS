@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
   <meta charset="utf-8">
@@ -377,28 +377,26 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Ahmad</td>
-                    <td>Mohammadi</td>
-                    <td>Herat</td>
-                    <td>23</td>
-                    <td>Male</td>
-                    <td>Single</td>
-                    <td>0790345687</td>
-                    <td>Waiter</td>
-                    <td>12000AF</td>
-                    <td>
-                      <button type="button" class="btn btn-sm btn-danger me-1" title="Delete">
-                        <i class="bi bi-trash"></i>
-                      </button>
-                      <button type="button" class="btn btn-sm btn-primary" title="Edit">
-                        <i class="bi bi-pencil-square"></i>
-                      </button>
-                    </td>
+                <tr th:each="employee : ${employees}" class="hover:bg-gray-100">
+                  <td class="border p-2" th:text="${employee.id}"></td>
+
+                  <td class="border p-2" th:text="${employee.firstName}"></td>
+                  <td class="border p-2" th:text="${employee.lastName}"></td>
+                  <td class="border p-2" th:text="${employee.address}"></td>
+                  <td class="border p-2" th:text="${employee.age}"></td>
+                  <td class="border p-2" th:text="${employee.gender}"></td>
+                  <td class="border p-2" th:text="${employee.status}"></td>
+                  <td class="border p-2" th:text="${employee.phoneNumber}"></td>
+                  <td class="border p-2" th:text="${employee.jobTitle}"></td>
+                  <td class="border p-2" th:text="${employee.salary}"></td>
 
 
-                  </tr>
+
+                  <td class="border p-2">
+                    <a th:href="@{'/employees/edit/' + ${employee.id}}" class="text-blue-600 hover:underline">Edit</a>
+                    <a th:href="@{'/delete/' + ${employee.id}}" class="text-red-600 hover:underline ml-4">Delete</a>
+                  </td>
+                </tr>
 
                 </tbody>
               </table>
