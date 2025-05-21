@@ -45,18 +45,18 @@ public class EmployeeController {
     // Show form to edit an existing employee
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable("id") Long id, Model model) {
-        Employee employee = employeeRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid employee Id:" + id));
+        Employee employee = employeeRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid employee Id:" + id));
         model.addAttribute("employee", employee);
-        return "edit";
+        return "update"; // Make sure update.html exists
     }
 
-    // Update an existing employee
     @PostMapping("/edit/{id}")
-    public String updateEmployee(Employee employee) {
-
+    public String updateEmployee(@ModelAttribute Employee employee) {
         employeeRepository.save(employee);
         return "redirect:/tables-general";
     }
+
 
     // Delete an employee
     @GetMapping("/delete/{id}")
